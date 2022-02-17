@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useCallback, useState } from "react"
+import { ChangeEventHandler, KeyboardEventHandler, useCallback, useState } from "react"
 import { useTodoList } from "../state/todoListState";
 
 export const TodoItemCreator: React.VFC = () => {
@@ -17,9 +17,17 @@ export const TodoItemCreator: React.VFC = () => {
     []
   );
 
+  const onKeyDown: KeyboardEventHandler<HTMLInputElement> = useCallback(
+    (event) => {
+    if (event.key === 'Enter') {
+      addListItem(inputValue);
+      setInputValue('');
+    }
+  }, [addListItem, inputValue, setInputValue]);
+
   return (
     <div>
-      <input type="text" value={inputValue} onChange={onChange} />
+      <input type="text" value={inputValue} onChange={onChange} onKeyDown={onKeyDown} />
       <button onClick={addItem}>Add</button>
     </div>
   );
