@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { todoListStatsState } from "./todoListStatsState";
+import { todoListStatsState } from "../state/todoListStatsState";
 
 export const TodoListStats: React.VFC = () => {
   const { totalNum, totalCompletedNum, totalUncompletedNum, percentCompleted } =

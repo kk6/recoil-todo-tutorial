@@ -1,22 +1,14 @@
 import { ChangeEventHandler, useCallback, useState } from "react"
-import { useSetRecoilState } from "recoil";
-import { todoListState } from "../todoListState";
+import { useTodoList } from "../state/todoListState";
 
 export const TodoItemCreator: React.VFC = () => {
   const [inputValue, setInputValue] = useState('');
-  const setTodoList = useSetRecoilState(todoListState);
+  const { addListItem } = useTodoList();
 
   const addItem = useCallback(() => {
-    setTodoList((oldTodoList) => [
-      ...oldTodoList,
-      {
-        id: getId(),
-        text: inputValue,
-        isComplete: false,
-      },
-    ]);
+    addListItem(inputValue);
     setInputValue('');
-  }, [inputValue, setTodoList]);
+  }, [addListItem, inputValue, setInputValue]);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     ({ target: { value } }) => {
@@ -31,9 +23,4 @@ export const TodoItemCreator: React.VFC = () => {
       <button onClick={addItem}>Add</button>
     </div>
   );
-}
-
-let id = 0;
-function getId() {
-  return id++;
 }
