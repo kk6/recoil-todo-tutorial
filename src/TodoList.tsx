@@ -1,17 +1,20 @@
 import { useRecoilValue } from "recoil";
+import { filteredTodoListState } from "./filteredTodoListState";
 import { TodoItem } from "./TodoItem";
 import { TodoItemCreator } from "./TodoItemCreator";
-import { todoListState } from "./todoListState";
+import { TodoListFilters } from "./TodoListFilters";
+import { TodoListStats } from "./TodoListStats";
 
 export const TodoList: React.VFC = () => {
-  const todoList = useRecoilValue(todoListState);
-
+  const todoList = useRecoilValue(filteredTodoListState);
   return (
     <>
+      <TodoListStats />
+      <TodoListFilters />
       <TodoItemCreator />
       {todoList.map((todoItem) => (
         <TodoItem key={todoItem.id} item={todoItem} />
       ))}
     </>
-  )
-}
+  );
+};
