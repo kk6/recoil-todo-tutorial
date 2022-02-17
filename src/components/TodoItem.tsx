@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useCallback, useMemo, VFC } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { todoListState, TodoItemType, useTodoList } from "../state/todoListState";
 
 type Props = {
